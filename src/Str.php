@@ -1,28 +1,28 @@
-<?php 
+<?php
 
 namespace Workbench;
 
 /**
  * String tool
- ** 
+ **
  * @package             Cineman/Workbench
  * @author              Mario Döring
  * @copyright           2016 Cinergy AG
  */
-class Str 
+class Str
 {
     /*
-     * just some chasetes at BIN i was running out of ideas 
+     * just some chasetes at BIN i was running out of ideas
      */
-    const KEY       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    const SECURE    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789äöüÄÖÜ@<({[/=\]})>!?$%&#*-+.,;:_';
-    const ALPHA_NUM = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const ALPHA     = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    const ALPHA_UP  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const ALPHA_LOW = 'abcdefghijklmnopqrstuvwxyz';
-    const NUM       = '0123456789';
-    const HEX       = '0123456789ABCDEF';
-    const BIN       = '01';
+    const KEY           = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const SECURE        = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789äöüÄÖÜ@<({[/=\]})>!?$%&#*-+.,;:_';
+    const ALPHA_NUM     = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const ALPHA         = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const ALPHA_UP      = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const ALPHA_LOW     = 'abcdefghijklmnopqrstuvwxyz';
+    const NUM           = '0123456789';
+    const HEX           = '0123456789ABCDEF';
+    const BIN           = '01';
 
     /**
      * Get a charset, a string containing a set of characters.
@@ -42,64 +42,62 @@ class Str
      *     num
      *     hex
      *     bin
-     * 
+     *
      * Everything else gets returned as its own charset.
      *
      * @param string        $charset        use predefined charset or your own
      * @return string
      */
-    public static function charset( $charset = null ) 
-    {   
-        switch( $charset ) 
-        {   
+    public static function charset($charset = null)
+    {
+        switch ($charset) {
             case 'pass':
             case 'secure':
             case 'password':
                 return static::SECURE;
-            break;
+                break;
 
             case 'key':
                 return static::KEY;
-            break;
+                break;
 
             case 'alphanum':
                 return static::ALPHA_NUM;
-            break;
+                break;
 
             case 'alpha':
                 return static::ALPHA;
-            break;
+                break;
 
             case 'alpha_low':
             case 'lowercase':
                 return static::ALPHA_LOW;
-            break;
+                break;
 
             case 'alpha_up':
             case 'uppercase':
                 return static::ALPHA_UP;
-            break;
+                break;
 
             case 'numeric':
             case 'num':
                 return static::NUM;
-            break;
+                break;
 
             case 'hex':
                 return static::HEX;
-            break;
+                break;
 
             case 'bin':
                 return static::BIN;
-            break;
+                break;
 
             default:
-                if ( !is_null( $charset ) ) 
-                {
+                if (!is_null($charset)) {
                     return $charset;
                 }
-                return static::charset( 'alphanum' );
-            break;
+                return static::charset('alphanum');
+                break;
         }
     }
 
@@ -109,19 +107,19 @@ class Str
      *     Str::random( 8, 'hex' ); // 56F6AE10
      *     Str::random( 4, 'password' ); // ?F%7
      *
-     * @param int       $length     Default is 25
+     * @param int           $length         Default is 25
      * @param string        $charset        This parameter uses the Str::charset function
      * @return string
      */
-    public static function random( $length = 25, $charset = null ) 
+    public static function random($length = 25, $charset = null)
     {
-        $charset = static::charset( $charset );
+        $charset = static::charset($charset);
 
-        $count = strlen( $charset ); $string = '';
+        $count = strlen($charset);
+        $string = '';
 
-        while ( $length-- ) 
-        {
-            $string .= $charset[mt_rand(0, $count-1)];
+        while ($length--) {
+            $string .= $charset[mt_rand(0, $count - 1)];
         }
 
         return $string;
@@ -130,28 +128,25 @@ class Str
     /**
      * Try to get a string from a callback reading the output buffer
      *
-     * @param mixed     $callback
-     * @param array         $params 
+     * @param mixed         $callback
+     * @param array         $params
      * @return string
      */
-    public static function capture( $callback, $params = array() )
+    public static function capture($callback, $params = array())
     {
-        if ( is_string( $callback ) )
-        {
+        if (is_string($callback)) {
             return $callback;
         }
 
-        if ( !is_array( $params ) ) 
-        {
-            $params = array( $params );
+        if (!is_array($params)) {
+            $params = array($params);
         }
 
         ob_start();
-        $return = call_user_func_array( $callback,  $params );
+        $return = call_user_func_array($callback, $params);
         $buffer = ob_get_clean();
 
-        if ( !is_null( $return ) )
-        {
+        if (!is_null($return)) {
             return $return;
         }
 
@@ -165,35 +160,29 @@ class Str
      * @param bool                  $recursive
      * @return string|array
      */
-    public static function htmlentities( $string, $recursive = false, $encoding = null) 
-    {   
-        if (is_null($encoding)) 
-        {
+    public static function htmlentities($string, $recursive = false, $encoding = null)
+    {
+        if (is_null($encoding)) {
             $encoding = 'utf-8';
         }
 
-        if ( is_array( $string ) ) 
-        {
-            foreach( $string as $key => $item ) 
-            {   
-                if ( $recursive ) 
-                {   
-                    if ( is_array( $item ) ) 
-                    {
-                        $string[$key] = static::htmlentities( $item, $recursive );
+        if (is_array($string)) {
+            foreach ($string as $key => $item) {
+                if ($recursive) {
+                    if (is_array($item)) {
+                        $string[$key] = static::htmlentities($item, $recursive);
                     }
                 }
 
-                if ( is_string( $item ) ) 
-                {
-                    $string[$key] = htmlentities( $item );
+                if (is_string($item)) {
+                    $string[$key] = htmlentities($item);
                 }
             }
 
             return $string;
         }
 
-        return htmlentities( $string, ENT_QUOTES, $encoding );
+        return htmlentities($string, ENT_QUOTES, $encoding);
     }
 
     /**
@@ -202,13 +191,13 @@ class Str
      *     Str::suffix( 'some-strange-file-name-2014' ); // 2014
      *     Str::suffix( '/path/to/my/file.xml', '/' ); // file.xml
      *
-     * @param string    $string
+     * @param string        $string
      * @param string        $sep            The seperator string.
      * @return string
      */
-    public static function suffix( $string, $sep = '-' ) 
+    public static function suffix($string, $sep = '-')
     {
-        return substr( $string, strrpos( $string, $sep )+strlen( $sep ) );
+        return substr($string, strrpos($string, $sep) + strlen($sep));
     }
 
     /**
@@ -216,26 +205,26 @@ class Str
      *
      *     Str::prefix( 'Dave is my name', ' ' ); // Dave
      *
-     * @param string    $string
+     * @param string        $string
      * @param string        $sep            The seperator string
      * @return string
      */
-    public static function prefix( $string, $sep = '-' ) 
+    public static function prefix($string, $sep = '-')
     {
-        return substr( $string, 0, strpos( $string, $sep ) );
+        return substr($string, 0, strpos($string, $sep));
     }
 
     /**
      * Alias of suffix using a dott
      *
      *     Str::extension( 'uploads/images/wallpaper.jpg' ); // jpg
-     * 
+     *
      * @param string    $string
      * @return string
      */
-    public static function extension( $string ) 
+    public static function extension($string)
     {
-        return static::suffix( $string, '.' );
+        return static::suffix($string, '.');
     }
 
     /**
@@ -246,15 +235,15 @@ class Str
      * @param string        $allowed
      * @return string
      */
-    public static function clean( $string, $allowed = "\-\." ) 
-    {   
-        return trim( preg_replace( array( 
-            '/[^A-Za-z0-9\ '.$allowed.']/',
-            '/[\ ]+/'
+    public static function clean($string, $allowed = "\-\.")
+    {
+        return trim(preg_replace(array(
+            '/[^A-Za-z0-9\ ' . $allowed . ']/',
+            '/[\ ]+/',
         ), array(
             '',
             ' ',
-        ), static::replace_accents( trim( $string ) ) ) );
+        ), static::replace_accents(trim($string))));
     }
 
     /**
@@ -263,116 +252,114 @@ class Str
      *
      * @param string    $string
      * @param string    $sep            You can define another seperator default is "-"
-     * @return string 
+     * @return string
      */
-    public static function clean_url( $string, $sep = null ) 
+    public static function clean_url($string, $sep = null)
     {
         // basic clean
-        $string = strtolower( static::replace_accents( trim( $string ) ) );
+        $string = strtolower(static::replace_accents(trim($string)));
 
         // these characters get replaced with our seperator
-        $string = str_replace( array( ' ', '&', '\r\n', '\n', '+', ',', '.', '_' ) , '-', $string );
+        $string = str_replace(array(' ', '&', '\r\n', '\n', '+', ',', '.', '_'), '-', $string);
 
-        $string = preg_replace( array(
+        $string = preg_replace(array(
             '/[^a-z0-9\-]/', // remove non alphanumerics
             '/[\-]+/', // only allow one in a row
-        ), array( '', '-' ), $string );
+        ), array('', '-'), $string);
 
         // custom seperator
-        if ( !is_null( $sep ) ) {
-            $string = str_replace( '-', $sep, $string );
+        if (!is_null($sep)) {
+            $string = str_replace('-', $sep, $string);
         }
 
         // trim the result again
-        return trim( $string, '-' );
+        return trim($string, '-');
     }
 
     /**
      * str_replace using key => value of an array
-     * 
+     *
      * @param string        $string
      * @param array         $arr
-     * @param int       $count 
+     * @param int           $count
      * @return string
      */
-    public static function replace( $string, $arr, $count = null ) 
+    public static function replace($string, $arr, $count = null)
     {
-        return str_replace( array_keys( $arr ), array_values( $arr ), $string, $count );
+        return str_replace(array_keys($arr), array_values($arr), $string, $count);
     }
 
     /**
      * preg replace using key => value of an array
-     * 
+     *
      * @param string        $string
      * @param array         $arr
-     * @param int       $count 
+     * @param int       $count
      * @return string
      */
-    public static function preg_replace( $arr, $string, $count = null ) 
+    public static function preg_replace($arr, $string, $count = null)
     {
-        return preg_replace( array_keys( $arr ), array_values( $arr ), $string, $count );
+        return preg_replace(array_keys($arr), array_values($arr), $string, $count);
     }
 
     /**
      * Converts an string to lowercase using the system encoding
-     * 
+     *
      * @param string        $string
-     * @param string    $encoding
+     * @param string        $encoding
      * @return string
      */
-    public static function lower( $string, $encoding = null )
+    public static function lower($string, $encoding = null)
     {
-        if (is_null($encoding)) 
-        {
+        if (is_null($encoding)) {
             $encoding = 'utf-8';
         }
-        return mb_strtolower( $string, $encoding );
+        return mb_strtolower($string, $encoding);
     }
 
     /**
      * Converts an string to uppercase using the system encoding
-     * 
+     *
      * @param string        $string
-     * @param string    $encoding
+     * @param string        $encoding
      * @return string
      */
-    public static function upper( $string, $encoding = null )
+    public static function upper($string, $encoding = null)
     {
-        if (is_null($encoding)) 
-        {
+        if (is_null($encoding)) {
             $encoding = 'utf-8';
         }
-        return mb_strtoupper( $string, $encoding );
+        return mb_strtoupper($string, $encoding);
     }
 
     /**
      * Replace accent characters with the nearest.
-     * 
+     *
      * @param string        $string
      * @return string
      */
-    public static function replace_accents( $string )
+    public static function replace_accents($string)
     {
-        return strtr( $string, array(
-            'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'Ae', 'Å'=>'A', 'Æ'=>'A', 'Ă'=>'A',
-            'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'ae', 'å'=>'a', 'ă'=>'a', 'æ'=>'ae',
-            'þ'=>'b', 'Þ'=>'B',
-            'Ç'=>'C', 'ç'=>'c',
-            'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E',
-            'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 
-            'Ğ'=>'G', 'ğ'=>'g',
-            'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'İ'=>'I', 'ı'=>'i', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i',
-            'Ñ'=>'N',
-            'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'Oe', 'Ø'=>'O', 'ö'=>'oe', 'ø'=>'o',
-            'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
-            'Š'=>'S', 'š'=>'s', 'Ş'=>'S', 'ș'=>'s', 'Ș'=>'S', 'ş'=>'s', 'ß'=>'ss',
-            'ț'=>'t', 'Ț'=>'T',
-            'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'Ue',
-            'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ü'=>'ue', 
-            'Ý'=>'Y',
-            'ý'=>'y', 'ý'=>'y', 'ÿ'=>'y',
-            'Ž'=>'Z', 'ž'=>'z'
-        )); 
+        return strtr($string, array(
+            'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'Ae', 'Å' => 'A', 'Æ' => 'A', 'Ă' => 'A',
+            'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'ae', 'å' => 'a', 'ă' => 'a', 'æ' => 'ae',
+            'þ' => 'b', 'Þ' => 'B',
+            'Ç' => 'C', 'ç' => 'c',
+            'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E',
+            'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
+            'Ğ' => 'G', 'ğ' => 'g',
+            'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'İ' => 'I', 'ı' => 'i', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i',
+            'Ñ' => 'N',
+            'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'Oe', 'Ø' => 'O', 'ö' => 'oe', 'ø' => 'o',
+            'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
+            'Š' => 'S', 'š' => 's', 'Ş' => 'S', 'ș' => 's', 'Ș' => 'S', 'ş' => 's', 'ß' => 'ss',
+            'ț' => 't', 'Ț' => 'T',
+            'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'Ue',
+            'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'ue',
+            'Ý' => 'Y',
+            'ý' => 'y', 'ý' => 'y', 'ÿ' => 'y',
+            'Ž' => 'Z', 'ž' => 'z',
+        ));
     }
 
     /**
@@ -382,32 +369,27 @@ class Str
      *     Str::cut( 'some/path/to/user.config.xml', '/', false ); // some/
      *     Str::cut( 'some/path/to/user.config.xml', '/', true, true ); // some/path/to
      *
-     * @param string    $string
+     * @param string        $string
      * @param string        $key                The string that after that should be cutted.
-     * @param bool      $cut_key            Should the key itself also be removed?
-     * @param bool      $last           Cut after the last appearing of the key?
+     * @param bool          $cut_key            Should the key itself also be removed?
+     * @param bool          $last           Cut after the last appearing of the key?
      * @return string
      */
-    public static function cut( $string, $key, $cut_key = true, $last = false ) 
+    public static function cut($string, $key, $cut_key = true, $last = false)
     {
-        if ( $last )
-        {
-            $pos = strrpos( $string, $key );
-        }
-        else 
-        {
-            $pos = strpos( $string, $key );
+        if ($last) {
+            $pos = strrpos($string, $key);
+        } else {
+            $pos = strpos($string, $key);
         }
 
-        if ( $pos === false ) 
-        {
+        if ($pos === false) {
             return $string;
         }
-        if ( !$cut_key ) 
-        {
-            $pos += strlen( $key );
+        if (!$cut_key) {
+            $pos += strlen($key);
         }
-        return substr( $string, 0, $pos );
+        return substr($string, 0, $pos);
     }
 
     /**
@@ -416,28 +398,27 @@ class Str
      *     Str::strip( 'I Am Iron Man', ' ' ); // IAmIronMan
      *     Str::strip( 'I Am Iron Man', 'I' ); // Am ron Man
      *
-     * @param string    $string
+     * @param string        $string
      * @param string        $key
      * @return string
      */
-    public static function strip( $string, $key ) 
+    public static function strip($string, $key)
     {
-        return str_replace( $key, '', $string );
+        return str_replace($key, '', $string);
     }
 
     /**
      * Round big numbers on thousends.
      *
      *     Str::kfloor( 127861 ); // 127K
-     * 
+     *
      * @param int       $int
      * @return string
      */
-    public static function kfloor( $int ) 
+    public static function kfloor($int)
     {
-        if ( $int >= 1000 ) 
-        {
-            return floor( $int / 1000 ) . 'K';
+        if ($int >= 1000) {
+            return floor($int / 1000) . 'K';
         }
         return $int;
     }
@@ -450,10 +431,10 @@ class Str
      * @param int       $size
      * @return string
      */
-    public static function bytes( $size, $round = 2 ) 
+    public static function bytes($size, $round = 2)
     {
-        $unit = array( 'b', 'kb', 'mb', 'gb', 'tb', 'pb' );
-        return @round( $size / pow( 1024, ( $i = floor( log( $size, 1024 ) ) ) ), $round ).$unit[$i];
+        $unit = array('b', 'kb', 'mb', 'gb', 'tb', 'pb');
+        return @round($size / pow(1024, ($i = floor(log($size, 1024)))), $round) . $unit[$i];
     }
 
     /**
@@ -462,8 +443,8 @@ class Str
      * @param int       $size
      * @return string
      */
-    public static function microtime( $time, $round = 3 ) 
+    public static function microtime($time, $round = 3)
     {
-        return round( $time, $round ).'s';
+        return round($time, $round) . 's';
     }
 }
