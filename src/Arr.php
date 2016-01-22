@@ -7,6 +7,7 @@ namespace Workbench;
  ** 
  * @package             Cineman/Workbench
  * @author              Mario Döring
+ * @copyright           2016 Cinergy AG
  */
 class Arr 
 {   
