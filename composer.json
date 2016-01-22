@@ -1,0 +1,27 @@
+{
+	"name": "cineman/workbench",
+	"type": "library",
+	"description": "The cineman Workbench provides helpful utils and tools for the daily developer life.",
+	"version": "1.0.0",
+	"keywords": [ "workbench", "utils", "helper" ],
+	"homepage": "https://github.com/cineman/workbench",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Mario Döring",
+			"role": "Developer"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Workbench\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Workbench\\Tests\\": "tests/"
+		}
+	},
+	"require": {
+	}
+}
