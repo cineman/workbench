@@ -1,116 +1,114 @@
-<?php 
+<?php
 
 namespace Workbench;
 
 /**
  * Array tool
- ** 
+ **
  * @package             Cineman/Workbench
  * @author              Mario Döring
  * @copyright           2016 Cinergy AG
  */
-class Arr 
-{   
+class Arr
+{
     /**
      * Get the first element of an array
      *
-     * @param array         $array
+     * @param array         $arrayay
      * @return mixed
      */
-    public static function first( $arr ) 
+    public static function first($array)
     {
-        return array_shift( $arr );
+        return array_shift($array);
     }
 
     /**
      * Get the last element of an array
      *
-     * @param array         $array
+     * @param array         $arrayay
      * @return mixed
      */
-    public static function last( $arr ) 
+    public static function last($array)
     {
-        return array_pop( $arr );
+        return array_pop($array);
     }
 
     /**
      * Adds a single item or array of items at the end of the referenced array
      * If you want to combine multiple arrays recursivly or use key => value pairs, please use Arr::merge()
-     * 
-     * Example:
-     *  $bar = array( 'bar' );
-     *  Arr::push( 'foo', $bar ); // $bar = array( 'bar', 'foo' )
-     *  Arr::push( array( 'foo', 'baz' ), $bar ); // $bar = array( 'bar', array( 'foo', 'baz' ) )
-     *  Arr::push( array( 'foo', 'baz' ), $bar, true ); // $bar = array( 'bar', 'foo', 'baz' )
      *
-     * @param mixed     $item       The item you would like to add to the array
-     * @param array     $array      The input array by reference
-     * @param bool      $merge      If $merge is set to true, push will merge each element of $item into $array
+     * Example:
+     *     $bar = array( 'bar' );
+     *     Arr::push( 'foo', $bar ); // $bar = array( 'bar', 'foo' )
+     *     Arr::push( array( 'foo', 'baz' ), $bar ); // $bar = array( 'bar', array( 'foo', 'baz' ) )
+     *     Arr::push( array( 'foo', 'baz' ), $bar, true ); // $bar = array( 'bar', 'foo', 'baz' )
+     *
+     * @param mixed         $item      The item you would like to add to the array
+     * @param array         $arrayay   The input array by reference
+     * @param bool          $merge     If $merge is set to true, push will merge each element of $item into $arrayay
+     * 
      * @return array
      */
-    public static function push( $item, &$arr, $merge = false ) 
-    {   
-        if( !is_array( $arr ) ) 
-        {
+    public static function push($item, &$array, $merge = false)
+    {
+        if (!is_array($array)) {
             throw new \InvalidArgumentException('Arr::push - second argument has to be an array.');
         }
 
-        if ( $merge && is_array( $item ) ) 
-        {
-            foreach ( $item as $value ) 
-            {
-                $arr[] = $value;
-            }   
-            return $arr;
+        if ($merge && is_array($item)) {
+            foreach ($item as $value) {
+                $array[] = $value;
+            }
+            return $array;
         }
-        $arr[] = $item;
-        return $arr;
+
+        $array[] = $item;
+
+        return $array;
     }
 
     /**
      * Adds an item to an element in the array
-     * 
+     *
      * Example:
      *     Arr::add( 'foo.bar', 'test' );
-     * 
-     * Results: 
+     *
+     * Results:
      *     array( 'foo' => array( 'bar' => array( 'test' ) ) )
      *
-     * @param string        $key 
-     * @param mixed     $item       The item you would like to add to the array
-     * @param array         $array
+     * @param string            $key
+     * @param mixed             $item
+     * @param array             $array
+     * 
      * @return array
      */
-    public static function add( $key, $item, &$arr ) 
-    {   
-        if( !is_array( $arr ) ) 
-        {
+    public static function add($key, $item, &$array)
+    {
+        if (!is_array($array)) {
             throw new \InvalidArgumentException('Arr::add - second argument has to be an array.');
         }
 
-        if ( !is_array( static::get( $key, $arr ) ) )
-        {
-            return static::set( $key, array( $item ), $arr );
+        if (!is_array(static::get($key, $array))) {
+            return static::set($key, array($item), $array);
         }
 
-        $valueArr = static::get( $key, $arr );
+        $valueArr = static::get($key, $array);
 
-        return static::set( $key, static::push( $item, $valueArr), $arr );
+        return static::set($key, static::push($item, $valueArr), $array);
     }
 
     /**
      * Forwards an array value as key
-     * 
+     *
      * @param string                $key
-     * @param array                 $arr
+     * @param array                 $array
      * @return array
      */
-    public static function forward_key($key, $arr)
+    public static function forward_key($key, $array)
     {
-        $result = array(); 
+        $result = array();
 
-        foreach($arr as $arrkey => $value)
-        {
+        foreach ($array as $arraykey => $value) {
             $result[static::get($key, $value)] = $value;
         }
 
@@ -120,22 +118,20 @@ class Arr
     /**
      * get a special item from every array
      *
-     * @param mixed         $key
-     * @param array[array]  $arr
+     * @param mixed                 $key
+     * @param array[array]          $array
      * @return array
      */
-    public static function pick( $key, $arr ) 
-    {   
-        if( !is_array( $arr ) ) 
-        {
+    public static function pick($key, $array)
+    {
+        if (!is_array($array)) {
             throw new \InvalidArgumentException('Arr::pick - second argument has to be an array.');
         }
 
         $return = array();
 
-        foreach( $arr as $array ) 
-        {
-            $return[] = Arr::get( $key, $array );
+        foreach ($array as $arrayay) {
+            $return[] = Arr::get($key, $arrayay);
         }
 
         return $return;
@@ -145,20 +141,18 @@ class Arr
      * get a special item from every array
      *
      * @param mixed             $key
-     * @param array[obj]        $arr
+     * @param array[obj]        $array
      * @return array
      */
-    public static function pick_object( $key, $arr ) 
+    public static function pick_object($key, $array)
     {
-        if( !is_array( $arr ) ) 
-        {
+        if (!is_array($array)) {
             throw new \InvalidArgumentException('Arr::pick - second argument has to be an array.');
         }
 
         $return = array();
 
-        foreach( $arr as $object ) 
-        {
+        foreach ($array as $object) {
             $return[] = $object->{$key};
         }
 
@@ -170,18 +164,17 @@ class Arr
      * Elements with empty arrays doesn't count!
      *
      * Example:
-     *  Arr::is_multi( array( 'foo', array( 'bar', 'baz' ) ) ) === true
-     *  Arr::is_multi( array( array() ) ) === false
-     *  Arr::is_multi( false ) === false
-     * 
-     * @param array         $arr
+     *     Arr::is_multi( array( 'foo', array( 'bar', 'baz' ) ) ) === true
+     *     Arr::is_multi( array( array() ) ) === false
+     *     Arr::is_multi( false ) === false
+     *
+     * @param array         $array
      * @return bool
      */
-    public static function is_multi( $arr ) 
+    public static function is_multi($array)
     {
-        // if $arr isn't an array both count() will return useless values 0 (count(null)) or 1 (count(false)) and so the function will return false
-        if ( count( $arr ) == count( $arr, COUNT_RECURSIVE ) ) 
-        {
+        // if $array isn't an array both count() will return useless values 0 (count(null)) or 1 (count(false)) and so the function will return false
+        if (count($array) == count($array, COUNT_RECURSIVE)) {
             return false;
         }
         return true;
@@ -191,43 +184,39 @@ class Arr
      * Check if first element of an array is an array
      *
      * Example:
-     *  Arr::is_collection( array( 'foo', array( 'bar', 'baz' ) ) ) === false
-     *  Arr::is_collection( array( array() ) ) === true
-     *  Arr::is_collection( false ) // Exception
+     *     Arr::is_collection( array( 'foo', array( 'bar', 'baz' ) ) ) === false
+     *     Arr::is_collection( array( array() ) ) === true
+     *     Arr::is_collection( false ) // Exception
      *
-     * @param array         $arr
+     * @param array         $array
      * @return bool
      */
-    public static function is_collection( $arr ) 
+    public static function is_collection($array)
     {
-        return is_array( reset( $arr ) );
+        return is_array(reset($array));
     }
 
     /**
      * sum items in an array or use special item in the array
      *
-     * @param array[array]  $arr
+     * @param array[array]      $array
      * @param string            $key
      */
-    public static function sum( $arr, $key = null ) 
-    {   
-        if( !is_array( $arr ) ) 
-        {
+    public static function sum($array, $key = null)
+    {
+        if (!is_array($array)) {
             throw new \InvalidArgumentException('Arr::sum - first argument has to be an array.');
         }
 
         $sum = 0;
 
-        if ( is_string( $key ) && Arr::is_multi( $arr ) ) 
-        {
-            $arr = Arr::pick( $key, $arr );
+        if (is_string($key) && Arr::is_multi($array)) {
+            $array = Arr::pick($key, $array);
         }
 
-        foreach ( $arr as $item ) 
-        {
-            if ( is_numeric( $item ) ) 
-            {
-                $sum += $item;  
+        foreach ($array as $item) {
+            if (is_numeric($item)) {
+                $sum += $item;
             }
         }
 
@@ -235,48 +224,42 @@ class Arr
     }
 
     /**
-     * get the average of the items 
+     * get the average of the items
      *
-     * @param array[array]  $arr
+     * @param array[array]      $array
      * @param string            $key
      */
-    public static function average( $arr, $key = null ) 
+    public static function average($array, $key = null)
     {
-        if( !is_array( $arr ) ) 
-        {
+        if (!is_array($array)) {
             throw new \InvalidArgumentException('Arr::average - first argunent has to be an array.');
         }
 
-        if ( is_string( $key ) && Arr::is_multi( $arr ) ) 
-        {
-            $arr = Arr::pick( $key, $arr );
+        if (is_string($key) && Arr::is_multi($array)) {
+            $array = Arr::pick($key, $array);
         }
 
-        return ( static::sum( $arr ) / count( $arr ) );
+        return (static::sum($array) / count($array));
     }
 
-    /** 
+    /**
      * create an object from an array
      *
-     * @param array     $array
+     * @param array             $array
      * @return object
      */
-    public static function object( $arr ) 
+    public static function object($array)
     {
-        if( !is_array( $arr ) ) 
-        {
+        if (!is_array($array)) {
             throw new \InvalidArgumentException("Arr::object - only arrays can be passed.");
         }
 
         $object = new \stdClass();
 
-        if ( !empty( $arr ) ) 
-        {
-            foreach ( $arr as $name => $value) 
-            {
-                if ( is_array( $value ) ) 
-                {
-                    $value = static::object( $value );
+        if (!empty($array)) {
+            foreach ($array as $name => $value) {
+                if (is_array($value)) {
+                    $value = static::object($value);
                 }
                 $object->$name = $value;
             }
@@ -290,27 +273,22 @@ class Arr
      *
      * @param array         $array ...
      * @return array
-     */ 
-    public static function merge() 
+     */
+    public static function merge()
     {
         // get all arguments
-        $arrs = func_get_args();
+        $arrays = func_get_args();
         $return = array();
 
-        foreach ( $arrs as $arr )
-        {
-            if ( !is_array( $arr ) ) 
-            {
+        foreach ($arrays as $array) {
+            if (!is_array($array)) {
                 throw new \InvalidArgumentException('Arr::merge - all arguments have to be arrays.');
             }
 
-            foreach ( $arr as $key => $value ) 
-            {   
-                if ( array_key_exists( $key, $return ) ) 
-                {
-                    if ( is_array( $value ) && is_array( $return[$key] ) ) 
-                    {
-                        $value = static::merge( $return[$key], $value );
+            foreach ($array as $key => $value) {
+                if (array_key_exists($key, $return)) {
+                    if (is_array($value) && is_array($return[$key])) {
+                        $value = static::merge($return[$key], $value);
                     }
                 }
                 $return[$key] = $value;
@@ -320,62 +298,53 @@ class Arr
         return $return;
     }
 
-
-
     /**
      * return an item from an array with dottet dimensions
      *
-     * @param string        $key 
-     * @param array     $arr
-     * @param mixed     $default
-     * @return mixed 
+     * @param string        $key
+     * @param array         $array
+     * @param mixed         $default
+     * @return mixed
      */
-    public static function get( $key, $arr, $default = null ) 
+    public static function get($key, $array, $default = null)
     {
-        if ( isset( $arr[$key] ) ) 
-        {
-            return $arr[$key];
+        if (isset($array[$key])) {
+            return $array[$key];
         }
 
-        if ( strpos( $key, '.' ) !== false ) 
-        {
-            $kp = explode( '.', $key );
+        if (strpos($key, '.') !== false) {
+            $kp = explode('.', $key);
 
-            switch ( count( $kp ) ) 
-            {
+            switch (count($kp)) {
                 case 2:
-                if ( isset( $arr[$kp[0]][$kp[1]] ) ) 
-                {
-                    return $arr[$kp[0]][$kp[1]]; 
-                }
-                break;
+                    if (isset($array[$kp[0]][$kp[1]])) {
+                        return $array[$kp[0]][$kp[1]];
+                    }
+                    break;
                 case 3:
-                if ( isset( $arr[$kp[0]][$kp[1]][$kp[2]] ) ) 
-                {
-                    return $arr[$kp[0]][$kp[1]][$kp[2]]; 
-                }
-                break;  
+                    if (isset($array[$kp[0]][$kp[1]][$kp[2]])) {
+                        return $array[$kp[0]][$kp[1]][$kp[2]];
+                    }
+                    break;
                 case 4:
-                if ( isset( $arr[$kp[0]][$kp[1]][$kp[2]][$kp[3]] ) ) 
-                {
-                    return $arr[$kp[0]][$kp[1]][$kp[2]][$kp[3]]; 
-                }
-                break;
+                    if (isset($array[$kp[0]][$kp[1]][$kp[2]][$kp[3]])) {
+                        return $array[$kp[0]][$kp[1]][$kp[2]][$kp[3]];
+                    }
+                    break;
 
                 // if there are more then 4 parts loop trough them
                 default:
-                    $curr = $arr;
-                    foreach( $kp as $k ) 
-                    {
-                        if ( isset( $curr[$k] ) ) {
+                    $curr = $array;
+                    foreach ($kp as $k) {
+                        if (isset($curr[$k])) {
                             $curr = $curr[$k];
-                        } else { 
-                            return $default; 
+                        } else {
+                            return $default;
                         }
                     }
                     return $curr;
-                break;
-            }   
+                    break;
+            }
         }
 
         return $default;
@@ -384,42 +353,42 @@ class Arr
     /**
      * checks if the array has an item with dottet dimensions
      *
-     * @param string        $key 
-     * @param array     $arr
+     * @param string        $key
+     * @param array     $array
      * @return bool
      */
-    public static function has( $key, $arr ) 
-    {   
-        if ( isset( $arr[$key] ) ) 
-        {
+    public static function has($key, $array)
+    {
+        if (isset($array[$key])) {
             return true;
         }
 
-        if ( strpos( $key, '.' ) !== false ) 
-        {
-            $kp = explode( '.', $key );
+        if (strpos($key, '.') !== false) {
+            $kp = explode('.', $key);
 
-            switch ( count( $kp ) ) {
+            switch (count($kp)) {
                 case 2:
-                    return isset( $arr[$kp[0]][$kp[1]] ); break;
+                    return isset($array[$kp[0]][$kp[1]]);
+                    break;
                 case 3:
-                    return isset( $arr[$kp[0]][$kp[1]][$kp[2]] ); break;    
+                    return isset($array[$kp[0]][$kp[1]][$kp[2]]);
+                    break;
                 case 4:
-                    return isset( $arr[$kp[0]][$kp[1]][$kp[2]][$kp[3]] ); break;
+                    return isset($array[$kp[0]][$kp[1]][$kp[2]][$kp[3]]);
+                    break;
 
                 // if there are more then 4 parts loop trough them
                 default:
-                    $curr = $arr;
-                    foreach( $kp as $k ) 
-                    {
-                        if ( isset( $curr[$k] ) ) {
+                    $curr = $array;
+                    foreach ($kp as $k) {
+                        if (isset($curr[$k])) {
                             $curr = $curr[$k];
-                        } else { 
-                            return false; 
+                        } else {
+                            return false;
                         }
                     }
                     return true;
-                break;
+                    break;
             }
         }
         return false;
@@ -428,73 +397,72 @@ class Arr
     /**
      * sets an item from an array with dottet dimensions
      *
-     * @param string    $key 
+     * @param string    $key
      * @param mixed     $value
-     * @param array     $arr
+     * @param array     $array
      * @return array
      */
-    public static function set( $key, $value, &$arr ) 
-    {   
-        if ( strpos( $key, '.' ) === false ) 
-        {
-            $arr[$key] = $value;
+    public static function set($key, $value, &$array)
+    {
+        if (strpos($key, '.') === false) {
+            $array[$key] = $value;
 
-        } 
-        else 
-        {
-            $kp = explode( '.', $key );
+        } else {
+            $kp = explode('.', $key);
 
-            switch ( count( $kp ) ) 
-            {
+            switch (count($kp)) {
                 case 2:
-                    $arr[$kp[0]][$kp[1]] = $value; break;
+                    $array[$kp[0]][$kp[1]] = $value;
+                    break;
                 case 3:
-                    $arr[$kp[0]][$kp[1]][$kp[2]] = $value; break;   
+                    $array[$kp[0]][$kp[1]][$kp[2]] = $value;
+                    break;
                 case 4:
-                    $arr[$kp[0]][$kp[1]][$kp[2]][$kp[3]] = $value; break;
+                    $array[$kp[0]][$kp[1]][$kp[2]][$kp[3]] = $value;
+                    break;
 
                 // if there are more then 4 parts loop trough them
                 default:
-                    $kp = array_reverse( $kp );
+                    $kp = array_reverse($kp);
                     $curr = $value;
 
-                    foreach( $kp as $k ) 
-                    {
-                        $curr = array( $k => $curr );
+                    foreach ($kp as $k) {
+                        $curr = array($k => $curr);
                     }
 
-                    $arr = static::merge( $arr, $curr );
-                break;
+                    $array = static::merge($array, $curr);
+                    break;
             }
         }
-        return $arr;
+        return $array;
     }
 
     /**
      * deletes an item from an array with dottet dimensions
      *
-     * @param string        $key 
-     * @param array     $arr
+     * @param string        $key
+     * @param array     $array
      * @return void
      */
-    public static function delete( $key, &$arr ) 
-    {   
-        if ( isset( $arr[$key] ) ) 
-        {
-            unset( $arr[$key] ); return;
+    public static function delete($key, &$array)
+    {
+        if (isset($array[$key])) {
+            unset($array[$key]);return;
         }
 
-        if ( strpos( $key, '.' ) !== false ) 
-        {   
-            $kp = explode( '.', $key );
+        if (strpos($key, '.') !== false) {
+            $kp = explode('.', $key);
 
-            switch ( count( $kp ) ) {
+            switch (count($kp)) {
                 case 2:
-                    unset( $arr[$kp[0]][$kp[1]] ); return; break;
+                    unset($array[$kp[0]][$kp[1]]);return;
+                    break;
                 case 3:
-                    unset( $arr[$kp[0]][$kp[1]][$kp[2]] ); return; break;
+                    unset($array[$kp[0]][$kp[1]][$kp[2]]);return;
+                    break;
                 case 4:
-                    unset( $arr[$kp[0]][$kp[1]][$kp[2]][$kp[3]] ); return; break;
+                    unset($array[$kp[0]][$kp[1]][$kp[2]][$kp[3]]);return;
+                    break;
             }
         }
     }
