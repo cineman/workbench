@@ -92,7 +92,9 @@ class Arr
             return static::set( $key, array( $item ), $arr );
         }
 
-        return static::set( $key, static::push( $item, static::get( $key, $arr ) ), $arr );
+        $valueArr = static::get( $key, $arr );
+
+        return static::set( $key, static::push( $item, $valueArr), $arr );
     }
 
     /**

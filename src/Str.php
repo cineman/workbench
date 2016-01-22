@@ -13,7 +13,7 @@ class Str
     /*
      * just some chasetes at BIN i was running out of ideas 
      */
-    const KEY       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789----';
+    const KEY       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     const SECURE    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789äöüÄÖÜ@<({[/=\]})>!?$%&#*-+.,;:_';
     const ALPHA_NUM = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const ALPHA     = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -140,11 +140,6 @@ class Str
             return $callback;
         }
 
-        if ( !is_closure( $callback ) )
-        {
-            return "";
-        }
-
         if ( !is_array( $params ) ) 
         {
             $params = array( $params );
@@ -169,8 +164,13 @@ class Str
      * @param bool                  $recursive
      * @return string|array
      */
-    public static function htmlentities( $string, $recursive = false ) 
+    public static function htmlentities( $string, $recursive = false, $encoding = null) 
     {   
+        if (is_null($encoding)) 
+        {
+            $encoding = 'utf-8';
+        }
+
         if ( is_array( $string ) ) 
         {
             foreach( $string as $key => $item ) 
@@ -192,7 +192,7 @@ class Str
             return $string;
         }
 
-        return htmlentities( $string, ENT_QUOTES, ClanCats::$config->charset );
+        return htmlentities( $string, ENT_QUOTES, $encoding );
     }
 
     /**
@@ -235,37 +235,6 @@ class Str
     public static function extension( $string ) 
     {
         return static::suffix( $string, '.' );
-    }
-
-    /**
-     * Hashs a string using the configurable method. ( main.config -> security.hash )
-     *
-     * @param string    $string
-     * @return string
-     */
-    public static function hash( $string ) 
-    {
-        if (is_numeric( $algo = ClanCats::$config->get( 'security.hash', 'md5') ))
-        {
-            return password_hash( $string, $algo );
-        }
-        return call_user_func( $algo, $string );
-    }
-
-    /**
-     * Verifies a hash with a plaintext string using the configurable method. ( main.config -> security.hash )
-     *
-     * @param string    $string
-     * @param string    $hash
-     * @return bool
-     */
-    public static function verify_hash( $string, $hash ) 
-    {
-        if (is_numeric( $algo = ClanCats::$config->get( 'security.hash', 'md5') ))
-        {
-            return password_verify( $string, $hash );
-        }
-        return ($hash === call_user_func( $algo, $string ));
     }
 
     /**
@@ -352,9 +321,9 @@ class Str
      */
     public static function lower( $string, $encoding = null )
     {
-        if ( is_null( $encoding ) )
+        if (is_null($encoding)) 
         {
-            $encoding = ClanCats::$config->charset;
+            $encoding = 'utf-8';
         }
         return mb_strtolower( $string, $encoding );
     }
@@ -368,9 +337,9 @@ class Str
      */
     public static function upper( $string, $encoding = null )
     {
-        if ( is_null( $encoding ) )
+        if (is_null($encoding)) 
         {
-            $encoding = ClanCats::$config->charset;
+            $encoding = 'utf-8';
         }
         return mb_strtoupper( $string, $encoding );
     }

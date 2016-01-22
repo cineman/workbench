@@ -134,18 +134,7 @@ class StrTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( Str::extension( 'test.sdf.......pdf' ), 'pdf' );
 	}
 	
-	/**
-	 * test extentsion
-	 */
-	public function testHash() 
-	{
-		ClanCats::$config->set( 'security.hash', 'sha1' );
-		$this->assertEquals( strlen( Str::hash( 'testing around' ) ), 40 );
-		
-		ClanCats::$config->set( 'security.hash', 'md5' );
-		$this->assertEquals( strlen( Str::hash( 'testing around' ) ), 32 );
-	}
-	
+
 	/**
 	 * test clean
 	 */

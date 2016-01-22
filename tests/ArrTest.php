@@ -155,7 +155,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testArrayPickException() 
 	{	
-		Arr::pick( 'test' );
+		Arr::pick( 'test', 'thisIsAnArray' );
 	}
 	
 	/**
