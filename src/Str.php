@@ -1,14 +1,14 @@
-<?php namespace Core;
+<?php 
+
+namespace Workbench;
+
 /**
- * String functions
+ * String tool
  ** 
- *
- * @package     ClanCatsFramework
- * @author      Mario Döring <mario@clancats.com>
- * @version     2.0
- *
+ * @package             Cineman/Workbench
+ * @author              Mario Döring
  */
-class CCStr 
+class Str 
 {
     /*
      * just some chasetes at BIN i was running out of ideas 
@@ -105,11 +105,11 @@ class CCStr
     /**
      * Generate a random string with the given length and charset.
      *
-     *     CCStr::random( 8, 'hex' ); // 56F6AE10
-     *     CCStr::random( 4, 'password' ); // ?F%7
+     *     Str::random( 8, 'hex' ); // 56F6AE10
+     *     Str::random( 4, 'password' ); // ?F%7
      *
      * @param int       $length     Default is 25
-     * @param string        $charset        This parameter uses the CCStr::charset function
+     * @param string        $charset        This parameter uses the Str::charset function
      * @return string
      */
     public static function random( $length = 25, $charset = null ) 
@@ -198,8 +198,8 @@ class CCStr
     /**
      * Get the last part of a string
      *
-     *     CCStr::suffix( 'some-strange-file-name-2014' ); // 2014
-     *     CCStr::suffix( '/path/to/my/file.xml', '/' ); // file.xml
+     *     Str::suffix( 'some-strange-file-name-2014' ); // 2014
+     *     Str::suffix( '/path/to/my/file.xml', '/' ); // file.xml
      *
      * @param string    $string
      * @param string        $sep            The seperator string.
@@ -213,7 +213,7 @@ class CCStr
     /**
      * Get the first part of a string
      *
-     *     CCStr::prefix( 'Dave is my name', ' ' ); // Dave
+     *     Str::prefix( 'Dave is my name', ' ' ); // Dave
      *
      * @param string    $string
      * @param string        $sep            The seperator string
@@ -227,7 +227,7 @@ class CCStr
     /**
      * Alias of suffix using a dott
      *
-     *     CCStr::extension( 'uploads/images/wallpaper.jpg' ); // jpg
+     *     Str::extension( 'uploads/images/wallpaper.jpg' ); // jpg
      * 
      * @param string    $string
      * @return string
@@ -408,9 +408,9 @@ class CCStr
     /**
      * Cuts a string after another string.
      *
-     *     CCStr::cut( 'some/path/to/user.config.xml', '.' ); // some/path/to/user
-     *     CCStr::cut( 'some/path/to/user.config.xml', '/', false ); // some/
-     *     CCStr::cut( 'some/path/to/user.config.xml', '/', true, true ); // some/path/to
+     *     Str::cut( 'some/path/to/user.config.xml', '.' ); // some/path/to/user
+     *     Str::cut( 'some/path/to/user.config.xml', '/', false ); // some/
+     *     Str::cut( 'some/path/to/user.config.xml', '/', true, true ); // some/path/to
      *
      * @param string    $string
      * @param string        $key                The string that after that should be cutted.
@@ -443,8 +443,8 @@ class CCStr
     /**
      * Removes a string from another one
      *
-     *     CCStr::strip( 'I Am Iron Man', ' ' ); // IAmIronMan
-     *     CCStr::strip( 'I Am Iron Man', 'I' ); // Am ron Man
+     *     Str::strip( 'I Am Iron Man', ' ' ); // IAmIronMan
+     *     Str::strip( 'I Am Iron Man', 'I' ); // Am ron Man
      *
      * @param string    $string
      * @param string        $key
@@ -458,7 +458,7 @@ class CCStr
     /**
      * Round big numbers on thousends.
      *
-     *     CCStr::kfloor( 127861 ); // 127K
+     *     Str::kfloor( 127861 ); // 127K
      * 
      * @param int       $int
      * @return string
@@ -475,7 +475,7 @@ class CCStr
     /**
      * Convert bytes to a human readable format
      *
-     *     CCStr::bytes( 39247293 ); // 37.43mb
+     *     Str::bytes( 39247293 ); // 37.43mb
      *
      * @param int       $size
      * @return string

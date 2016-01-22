@@ -1,15 +1,14 @@
-<?php namespace Core;
+<?php 
+
+namespace Workbench;
+
 /**
- * Array
- * php array helpers
+ * Array tool
  ** 
- *
- * @package     ClanCatsFramework
- * @author      Mario Döring <mario@clancats.com>
- * @version     2.0
- *
+ * @package             Cineman/Workbench
+ * @author              Mario Döring
  */
-class CCArr 
+class Arr 
 {   
     /**
      * Get the first element of an array
@@ -35,13 +34,13 @@ class CCArr
 
     /**
      * Adds a single item or array of items at the end of the referenced array
-     * If you want to combine multiple arrays recursivly or use key => value pairs, please use CCArr::merge()
+     * If you want to combine multiple arrays recursivly or use key => value pairs, please use Arr::merge()
      * 
      * Example:
      *  $bar = array( 'bar' );
-     *  CCArr::push( 'foo', $bar ); // $bar = array( 'bar', 'foo' )
-     *  CCArr::push( array( 'foo', 'baz' ), $bar ); // $bar = array( 'bar', array( 'foo', 'baz' ) )
-     *  CCArr::push( array( 'foo', 'baz' ), $bar, true ); // $bar = array( 'bar', 'foo', 'baz' )
+     *  Arr::push( 'foo', $bar ); // $bar = array( 'bar', 'foo' )
+     *  Arr::push( array( 'foo', 'baz' ), $bar ); // $bar = array( 'bar', array( 'foo', 'baz' ) )
+     *  Arr::push( array( 'foo', 'baz' ), $bar, true ); // $bar = array( 'bar', 'foo', 'baz' )
      *
      * @param mixed     $item       The item you would like to add to the array
      * @param array     $array      The input array by reference
@@ -52,7 +51,7 @@ class CCArr
     {   
         if( !is_array( $arr ) ) 
         {
-            throw new \InvalidArgumentException('CCArr::push - second argument has to be an array.');
+            throw new \InvalidArgumentException('Arr::push - second argument has to be an array.');
         }
 
         if ( $merge && is_array( $item ) ) 
@@ -71,7 +70,7 @@ class CCArr
      * Adds an item to an element in the array
      * 
      * Example:
-     *     CCArr::add( 'foo.bar', 'test' );
+     *     Arr::add( 'foo.bar', 'test' );
      * 
      * Results: 
      *     array( 'foo' => array( 'bar' => array( 'test' ) ) )
@@ -85,7 +84,7 @@ class CCArr
     {   
         if( !is_array( $arr ) ) 
         {
-            throw new \InvalidArgumentException('CCArr::add - second argument has to be an array.');
+            throw new \InvalidArgumentException('Arr::add - second argument has to be an array.');
         }
 
         if ( !is_array( static::get( $key, $arr ) ) )
@@ -126,14 +125,14 @@ class CCArr
     {   
         if( !is_array( $arr ) ) 
         {
-            throw new \InvalidArgumentException('CCArr::pick - second argument has to be an array.');
+            throw new \InvalidArgumentException('Arr::pick - second argument has to be an array.');
         }
 
         $return = array();
 
         foreach( $arr as $array ) 
         {
-            $return[] = CCArr::get( $key, $array );
+            $return[] = Arr::get( $key, $array );
         }
 
         return $return;
@@ -150,7 +149,7 @@ class CCArr
     {
         if( !is_array( $arr ) ) 
         {
-            throw new \InvalidArgumentException('CCArr::pick - second argument has to be an array.');
+            throw new \InvalidArgumentException('Arr::pick - second argument has to be an array.');
         }
 
         $return = array();
@@ -168,9 +167,9 @@ class CCArr
      * Elements with empty arrays doesn't count!
      *
      * Example:
-     *  CCArr::is_multi( array( 'foo', array( 'bar', 'baz' ) ) ) === true
-     *  CCArr::is_multi( array( array() ) ) === false
-     *  CCArr::is_multi( false ) === false
+     *  Arr::is_multi( array( 'foo', array( 'bar', 'baz' ) ) ) === true
+     *  Arr::is_multi( array( array() ) ) === false
+     *  Arr::is_multi( false ) === false
      * 
      * @param array         $arr
      * @return bool
@@ -189,9 +188,9 @@ class CCArr
      * Check if first element of an array is an array
      *
      * Example:
-     *  CCArr::is_collection( array( 'foo', array( 'bar', 'baz' ) ) ) === false
-     *  CCArr::is_collection( array( array() ) ) === true
-     *  CCArr::is_collection( false ) // Exception
+     *  Arr::is_collection( array( 'foo', array( 'bar', 'baz' ) ) ) === false
+     *  Arr::is_collection( array( array() ) ) === true
+     *  Arr::is_collection( false ) // Exception
      *
      * @param array         $arr
      * @return bool
@@ -211,14 +210,14 @@ class CCArr
     {   
         if( !is_array( $arr ) ) 
         {
-            throw new \InvalidArgumentException('CCArr::sum - first argument has to be an array.');
+            throw new \InvalidArgumentException('Arr::sum - first argument has to be an array.');
         }
 
         $sum = 0;
 
-        if ( is_string( $key ) && CCArr::is_multi( $arr ) ) 
+        if ( is_string( $key ) && Arr::is_multi( $arr ) ) 
         {
-            $arr = CCArr::pick( $key, $arr );
+            $arr = Arr::pick( $key, $arr );
         }
 
         foreach ( $arr as $item ) 
@@ -242,12 +241,12 @@ class CCArr
     {
         if( !is_array( $arr ) ) 
         {
-            throw new \InvalidArgumentException('CCArr::average - first argunent has to be an array.');
+            throw new \InvalidArgumentException('Arr::average - first argunent has to be an array.');
         }
 
-        if ( is_string( $key ) && CCArr::is_multi( $arr ) ) 
+        if ( is_string( $key ) && Arr::is_multi( $arr ) ) 
         {
-            $arr = CCArr::pick( $key, $arr );
+            $arr = Arr::pick( $key, $arr );
         }
 
         return ( static::sum( $arr ) / count( $arr ) );
@@ -263,7 +262,7 @@ class CCArr
     {
         if( !is_array( $arr ) ) 
         {
-            throw new \InvalidArgumentException("CCArr::object - only arrays can be passed.");
+            throw new \InvalidArgumentException("Arr::object - only arrays can be passed.");
         }
 
         $object = new \stdClass();
@@ -299,7 +298,7 @@ class CCArr
         {
             if ( !is_array( $arr ) ) 
             {
-                throw new \InvalidArgumentException('CCArr::merge - all arguments have to be arrays.');
+                throw new \InvalidArgumentException('Arr::merge - all arguments have to be arrays.');
             }
 
             foreach ( $arr as $key => $value ) 
