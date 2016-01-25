@@ -2,9 +2,9 @@
 /**
  * String helper tests
  **
- * @package             Cineman/Workbench
- * @author               Mario Döring
- * @copyright             2016 Cinergy AG
+ * @package             	Cineman/Workbench
+ * @author               	Mario Döring
+ * @copyright             	2016 Cinergy AG
  *
  * @group Workbench
  * @group Workbench_Str
