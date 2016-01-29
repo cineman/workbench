@@ -24,7 +24,7 @@ Arr::first(['foo', 'bar']); // returns foo
 Arr::last(['foo', 'bar']); // returns bar
 ```
 
-#### pass by reference
+### Push
 
 [~ PHPDoc](/src/Arr.php#push)
 
@@ -37,7 +37,7 @@ Arr::push('Cherry', $array);
 // result of $array: ['Orange', 'Banana', 'Apple', 'Cherry']
 ```
 
-#### merge 
+### Merge 
 
 [~ PHPDoc](/src/Arr.php#merge)
 
