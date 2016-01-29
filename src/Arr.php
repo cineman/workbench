@@ -13,6 +13,8 @@ class Arr
 {
     /**
      * Get the first element of an array
+     * 
+     *     $first = Arr::first(['sam', 'rockwell'])
      *
      * @param array         $arrayay
      * @return mixed
@@ -25,7 +27,7 @@ class Arr
     /**
      * Get the last element of an array
      *
-     * @param array         $arrayay
+     * @param array         $array
      * @return mixed
      */
     public static function last($array)
