@@ -16,7 +16,7 @@ class Arr
      * 
      *     $first = Arr::first(['sam', 'rockwell'])
      *
-     * @param array         $arrayay
+     * @param array         $array
      * @return mixed
      */
     public static function first($array)
@@ -46,8 +46,8 @@ class Arr
      *     Arr::push( array( 'foo', 'baz' ), $bar, true ); // $bar = array( 'bar', 'foo', 'baz' )
      *
      * @param mixed         $item      The item you would like to add to the array
-     * @param array         $arrayay   The input array by reference
-     * @param bool          $merge     If $merge is set to true, push will merge each element of $item into $arrayay
+     * @param array         $array   The input array by reference
+     * @param bool          $merge     If $merge is set to true, push will merge each element of $item into $array
      * 
      * @return array
      */
@@ -142,8 +142,8 @@ class Arr
 
         $return = array();
 
-        foreach ($array as $arrayay) {
-            $return[] = Arr::get($key, $arrayay);
+        foreach ($array as $array) {
+            $return[] = Arr::get($key, $array);
         }
 
         return $return;
