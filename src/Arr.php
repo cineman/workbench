@@ -73,10 +73,10 @@ class Arr
      * Adds an item to an element in the array
      *
      * Example:
-     *     Arr::add( 'foo.bar', 'test' );
+     *     Arr::add('foo.bar', 'test');
      *
      * Results:
-     *     array( 'foo' => array( 'bar' => array( 'test' ) ) )
+     *     array('foo' => array('bar' => array('test')))
      *
      * @param string            $key
      * @param mixed             $item
@@ -101,6 +101,11 @@ class Arr
 
     /**
      * Forwards an array value as key
+     * 
+     *     $arr = Arr::forward_key('id', [
+     *         ['id' => 5, 'name' => 'Mario'], 
+     *         ['id' => 10, 'name' => 'Ray']
+     *     ])
      *
      * @param string                $key
      * @param array                 $array
@@ -118,7 +123,12 @@ class Arr
     }
 
     /**
-     * get a special item from every array
+     * Get a special value from every array item
+     * 
+     *     $names = Arr::pick('name', [
+     *         ['id' => 5, 'name' => 'Mario'], 
+     *         ['id' => 10, 'name' => 'Ray']
+     *     ])
      *
      * @param mixed                 $key
      * @param array[array]          $array
@@ -140,7 +150,7 @@ class Arr
     }
 
     /**
-     * get a special item from every array
+     * Same as normal pick but can deal with objects
      *
      * @param mixed             $key
      * @param array[obj]        $array

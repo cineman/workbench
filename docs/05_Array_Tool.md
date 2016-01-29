@@ -8,7 +8,7 @@ use Workbench\Arr;
 
 ## Functions
 
-### First
+### Get first
 
 [~ PHPDoc](/src/Arr.php#first)
 
@@ -16,7 +16,7 @@ use Workbench\Arr;
 Arr::first(['foo', 'bar']); // returns foo
 ```
 
-### Last
+### Get last
 
 [~ PHPDoc](/src/Arr.php#last)
 
@@ -24,7 +24,7 @@ Arr::first(['foo', 'bar']); // returns foo
 Arr::last(['foo', 'bar']); // returns bar
 ```
 
-### Push
+### Push item
 
 [~ PHPDoc](/src/Arr.php#push)
 
@@ -36,6 +36,40 @@ Arr::push('Cherry', $array);
 
 // result of $array: ['Orange', 'Banana', 'Apple', 'Cherry']
 ```
+
+### Add item
+
+[~ PHPDoc](/src/Arr.php#add)
+
+### Forward key
+
+[~ PHPDoc](/src/Arr.php#forward_key)
+
+### Pick items
+
+[~ PHPDoc](/src/Arr.php#pick)
+
+[~ PHPDoc](/src/Arr.php#pick_object)
+
+### Is multidimensional?
+
+[~ PHPDoc](/src/Arr.php#is_multi)
+
+### Is collection?
+
+[~ PHPDoc](/src/Arr.php#is_collection)
+
+### Sum values
+
+[~ PHPDoc](/src/Arr.php#sum)
+
+### Average of values
+
+[~ PHPDoc](/src/Arr.php#average)
+
+### Make object
+
+[~ PHPDoc](/src/Arr.php#object)
 
 ### Merge 
 
@@ -49,3 +83,19 @@ Arr::push(['Strawberry', 'Banana'], $array, true);
 
 // results in one array: ['Orange', 'Apple', 'Strawberry', 'Banana']
 ```
+
+### Get value
+
+[~ PHPDoc](/src/Arr.php#get)
+
+### Set value
+
+[~ PHPDoc](/src/Arr.php#set)
+
+### Has value
+
+[~ PHPDoc](/src/Arr.php#has)
+
+### Delete value
+
+[~ PHPDoc](/src/Arr.php#delete)
