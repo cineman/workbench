@@ -10,17 +10,23 @@ use Workbench\Arr;
 
 ### First
 
+[~ PHPDoc](/src/Arr.php#first)
+
 ```php
 Arr::first(['foo', 'bar']); // returns foo
 ```
 
 ### Last
 
+[~ PHPDoc](/src/Arr.php#last)
+
 ```php
 Arr::last(['foo', 'bar']); // returns bar
 ```
 
 #### pass by reference
+
+[~ PHPDoc](/src/Arr.php#push)
 
 The array is passed by reference another example:
 
@@ -32,6 +38,8 @@ Arr::push('Cherry', $array);
 ```
 
 #### merge 
+
+[~ PHPDoc](/src/Arr.php#merge)
 
 You can merge to arrays together:
 
