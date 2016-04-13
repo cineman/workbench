@@ -122,10 +122,10 @@ Str::upper('ÄCCÈNTS CÄN BE ÄNÖYING'); // äccènts cän be änöying
 
 ### Replace accents
 
-[~ PHPDoc](/src/Str.php#replace_accents)
+[~ PHPDoc](/src/Str.php#replaceAccents)
 
 ```php
-Str::replace_accents('äccènts cän be änöying'); // aeccents caen be aenoeying
+Str::replaceAccents('äccènts cän be änöying'); // aeccents caen be aenoeying
 ```
 
 ### Cut string

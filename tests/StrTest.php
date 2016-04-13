@@ -186,7 +186,7 @@ class StrTest extends \PHPUnit_Framework_TestCase
      */
     public function testReplaceAccents()
     {
-        $this->assertEquals(Str::replace_accents('HèllÖ Wörld ž'), 'HellOe Woerld z');
+        $this->assertEquals(Str::replaceAccents('HèllÖ Wörld ž'), 'HellOe Woerld z');
     }
 
     /**
