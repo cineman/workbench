@@ -156,10 +156,10 @@ class Arr
      * @param array[obj]        $array
      * @return array
      */
-    public static function pick_object($key, $array)
+    public static function pickObject($key, $array)
     {
         if (!is_array($array)) {
-            throw new \InvalidArgumentException('Arr::pick_object - second argument has to be an array.');
+            throw new \InvalidArgumentException('Arr::pickObject - second argument has to be an array.');
         }
 
         $return = array();
