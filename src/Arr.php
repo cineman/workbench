@@ -102,7 +102,7 @@ class Arr
     /**
      * Forwards an array value as key
      * 
-     *     $arr = Arr::forward_key('id', [
+     *     $arr = Arr::forwardKey('id', [
      *         ['id' => 5, 'name' => 'Mario'], 
      *         ['id' => 10, 'name' => 'Ray']
      *     ])
@@ -111,7 +111,7 @@ class Arr
      * @param array                 $array
      * @return array
      */
-    public static function forward_key($key, $array)
+    public static function forwardKey($key, $array)
     {
         $result = array();
 
@@ -156,10 +156,10 @@ class Arr
      * @param array[obj]        $array
      * @return array
      */
-    public static function pick_object($key, $array)
+    public static function pickObject($key, $array)
     {
         if (!is_array($array)) {
-            throw new \InvalidArgumentException('Arr::pick - second argument has to be an array.');
+            throw new \InvalidArgumentException('Arr::pickObject - second argument has to be an array.');
         }
 
         $return = array();
@@ -176,14 +176,14 @@ class Arr
      * Elements with empty arrays doesn't count!
      *
      * Example:
-     *     Arr::is_multi( array( 'foo', array( 'bar', 'baz' ) ) ) === true
-     *     Arr::is_multi( array( array() ) ) === false
-     *     Arr::is_multi( false ) === false
+     *     Arr::isMulti( array( 'foo', array( 'bar', 'baz' ) ) ) === true
+     *     Arr::isMulti( array( array() ) ) === false
+     *     Arr::isMulti( false ) === false
      *
      * @param array         $array
      * @return bool
      */
-    public static function is_multi($array)
+    public static function isMulti($array)
     {
         // if $array isn't an array both count() will return useless values 0 (count(null)) or 1 (count(false)) and so the function will return false
         if (count($array) == count($array, COUNT_RECURSIVE)) {
@@ -196,14 +196,14 @@ class Arr
      * Check if first element of an array is an array
      *
      * Example:
-     *     Arr::is_collection( array( 'foo', array( 'bar', 'baz' ) ) ) === false
-     *     Arr::is_collection( array( array() ) ) === true
-     *     Arr::is_collection( false ) // Exception
+     *     Arr::isCollection( array( 'foo', array( 'bar', 'baz' ) ) ) === false
+     *     Arr::isCollection( array( array() ) ) === true
+     *     Arr::isCollection( false ) // Exception
      *
      * @param array         $array
      * @return bool
      */
-    public static function is_collection($array)
+    public static function isCollection($array)
     {
         return is_array(reset($array));
     }
@@ -222,7 +222,7 @@ class Arr
 
         $sum = 0;
 
-        if (is_string($key) && Arr::is_multi($array)) {
+        if (is_string($key) && Arr::isMulti($array)) {
             $array = Arr::pick($key, $array);
         }
 
@@ -247,7 +247,7 @@ class Arr
             throw new \InvalidArgumentException('Arr::average - first argunent has to be an array.');
         }
 
-        if (is_string($key) && Arr::is_multi($array)) {
+        if (is_string($key) && Arr::isMulti($array)) {
             $array = Arr::pick($key, $array);
         }
 

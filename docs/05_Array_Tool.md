@@ -43,21 +43,21 @@ Arr::push('Cherry', $array);
 
 ### Forward key
 
-[~ PHPDoc](/src/Arr.php#forward_key)
+[~ PHPDoc](/src/Arr.php#forwardKey)
 
 ### Pick items
 
 [~ PHPDoc](/src/Arr.php#pick)
 
-[~ PHPDoc](/src/Arr.php#pick_object)
+[~ PHPDoc](/src/Arr.php#pickObject)
 
 ### Is multidimensional?
 
-[~ PHPDoc](/src/Arr.php#is_multi)
+[~ PHPDoc](/src/Arr.php#isMulti)
 
 ### Is collection?
 
-[~ PHPDoc](/src/Arr.php#is_collection)
+[~ PHPDoc](/src/Arr.php#isCollection)
 
 ### Sum values
 

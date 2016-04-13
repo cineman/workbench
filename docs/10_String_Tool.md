@@ -83,14 +83,14 @@ Str::clean('H(a)s"t       du hunger?', '\?'); // Hast du hunger?
 
 ### Clean url
 
-[~ PHPDoc](/src/Str.php#clean_url)
+[~ PHPDoc](/src/Str.php#cleanUrl)
 
 ```php
-Str::clean_url('Mr. Jonny *Köppl*'); // mr-jonny-koeppl
+Str::cleanUrl('Mr. Jonny *Köppl*'); // mr-jonny-koeppl
 ```
 
 ```php
-Str::clean_url('Team & Address+Contact'); // team-address-contact
+Str::cleanUrl('Team & Address+Contact'); // team-address-contact
 ```
 
 ### Replace
@@ -102,7 +102,7 @@ Str::replace('Hello (name).', array( '(name)' => 'Jaffy' )); // Hello Jaffy.
 ```
 ### Replace regex
 
-[~ PHPDoc](/src/Str.php#preg_replace)
+[~ PHPDoc](/src/Str.php#pregReplace)
 
 ### upper
 
@@ -122,10 +122,10 @@ Str::upper('ÄCCÈNTS CÄN BE ÄNÖYING'); // äccènts cän be änöying
 
 ### Replace accents
 
-[~ PHPDoc](/src/Str.php#replace_accents)
+[~ PHPDoc](/src/Str.php#replaceAccents)
 
 ```php
-Str::replace_accents('äccènts cän be änöying'); // aeccents caen be aenoeying
+Str::replaceAccents('äccènts cän be änöying'); // aeccents caen be aenoeying
 ```
 
 ### Cut string

@@ -243,7 +243,7 @@ class Str
         ), array(
             '',
             ' ',
-        ), static::replace_accents(trim($string))));
+        ), static::replaceAccents(trim($string))));
     }
 
     /**
@@ -254,10 +254,10 @@ class Str
      * @param string    $sep            You can define another seperator default is "-"
      * @return string
      */
-    public static function clean_url($string, $sep = null)
+    public static function cleanUrl($string, $sep = null)
     {
         // basic clean
-        $string = strtolower(static::replace_accents(trim($string)));
+        $string = strtolower(static::replaceAccents(trim($string)));
 
         // these characters get replaced with our seperator
         $string = str_replace(array(' ', '&', '\r\n', '\n', '+', ',', '.', '_'), '-', $string);
@@ -297,7 +297,7 @@ class Str
      * @param int       $count
      * @return string
      */
-    public static function preg_replace($arr, $string, $count = null)
+    public static function pregReplace($arr, $string, $count = null)
     {
         return preg_replace(array_keys($arr), array_values($arr), $string, $count);
     }
@@ -338,7 +338,7 @@ class Str
      * @param string        $string
      * @return string
      */
-    public static function replace_accents($string)
+    public static function replaceAccents($string)
     {
         return strtr($string, array(
             'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'Ae', 'Å' => 'A', 'Æ' => 'A', 'Ă' => 'A',

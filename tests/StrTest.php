@@ -151,10 +151,10 @@ class StrTest extends \PHPUnit_Framework_TestCase
      */
     public function testCleanUrl()
     {
-        $this->assertEquals(Str::clean_url('<>Hellö World!</>'), 'helloe-world');
-        $this->assertEquals(Str::clean_url('-- s-a- -as/&EDö__ $'), 's-a-as-edoe');
-        $this->assertEquals(Str::clean_url(' - Ich bin nüscht   such: Ideal!'), 'ich-bin-nuescht-such-ideal');
-        $this->assertEquals(Str::clean_url('Tom&Jerry'), 'tom-jerry');
+        $this->assertEquals(Str::cleanUrl('<>Hellö World!</>'), 'helloe-world');
+        $this->assertEquals(Str::cleanUrl('-- s-a- -as/&EDö__ $'), 's-a-as-edoe');
+        $this->assertEquals(Str::cleanUrl(' - Ich bin nüscht   such: Ideal!'), 'ich-bin-nuescht-such-ideal');
+        $this->assertEquals(Str::cleanUrl('Tom&Jerry'), 'tom-jerry');
     }
 
     /**
@@ -186,7 +186,7 @@ class StrTest extends \PHPUnit_Framework_TestCase
      */
     public function testReplaceAccents()
     {
-        $this->assertEquals(Str::replace_accents('HèllÖ Wörld ž'), 'HellOe Woerld z');
+        $this->assertEquals(Str::replaceAccents('HèllÖ Wörld ž'), 'HellOe Woerld z');
     }
 
     /**
