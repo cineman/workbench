@@ -254,7 +254,7 @@ class Str
      * @param string    $sep            You can define another seperator default is "-"
      * @return string
      */
-    public static function clean_url($string, $sep = null)
+    public static function cleanUrl($string, $sep = null)
     {
         // basic clean
         $string = strtolower(static::replaceAccents(trim($string)));

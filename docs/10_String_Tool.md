@@ -83,14 +83,14 @@ Str::clean('H(a)s"t       du hunger?', '\?'); // Hast du hunger?
 
 ### Clean url
 
-[~ PHPDoc](/src/Str.php#clean_url)
+[~ PHPDoc](/src/Str.php#cleanUrl)
 
 ```php
-Str::clean_url('Mr. Jonny *Köppl*'); // mr-jonny-koeppl
+Str::cleanUrl('Mr. Jonny *Köppl*'); // mr-jonny-koeppl
 ```
 
 ```php
-Str::clean_url('Team & Address+Contact'); // team-address-contact
+Str::cleanUrl('Team & Address+Contact'); // team-address-contact
 ```
 
 ### Replace
