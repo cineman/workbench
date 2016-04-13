@@ -7,8 +7,6 @@ The cineman Workbench provides helpful utils and tools for the daily developer l
 [![Packagist Version](https://img.shields.io/packagist/v/cineman/workbench.svg?style=flat-square)](https://packagist.org/packages/cineman/workbench)
 [![Total Downloads](https://img.shields.io/packagist/dt/cineman/workbench.svg?style=flat-square)](https://packagist.org/packages/cineman/workbench)
 
-Check out the [Documentation](http://labs.cinergy.ch/project/workbench/master/docs/).
-
 ## Installtion 
 
 The workbench is available on packagegist.
