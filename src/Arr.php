@@ -102,7 +102,7 @@ class Arr
     /**
      * Forwards an array value as key
      * 
-     *     $arr = Arr::forward_key('id', [
+     *     $arr = Arr::forwardKey('id', [
      *         ['id' => 5, 'name' => 'Mario'], 
      *         ['id' => 10, 'name' => 'Ray']
      *     ])
@@ -111,7 +111,7 @@ class Arr
      * @param array                 $array
      * @return array
      */
-    public static function forward_key($key, $array)
+    public static function forwardKey($key, $array)
     {
         $result = array();
 
@@ -159,7 +159,7 @@ class Arr
     public static function pick_object($key, $array)
     {
         if (!is_array($array)) {
-            throw new \InvalidArgumentException('Arr::pick - second argument has to be an array.');
+            throw new \InvalidArgumentException('Arr::pick_object - second argument has to be an array.');
         }
 
         $return = array();
