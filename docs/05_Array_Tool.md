@@ -57,7 +57,7 @@ Arr::push('Cherry', $array);
 
 ### Is collection?
 
-[~ PHPDoc](/src/Arr.php#is_collection)
+[~ PHPDoc](/src/Arr.php#isCollection)
 
 ### Sum values
 

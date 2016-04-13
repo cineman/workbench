@@ -196,14 +196,14 @@ class Arr
      * Check if first element of an array is an array
      *
      * Example:
-     *     Arr::is_collection( array( 'foo', array( 'bar', 'baz' ) ) ) === false
-     *     Arr::is_collection( array( array() ) ) === true
-     *     Arr::is_collection( false ) // Exception
+     *     Arr::isCollection( array( 'foo', array( 'bar', 'baz' ) ) ) === false
+     *     Arr::isCollection( array( array() ) ) === true
+     *     Arr::isCollection( false ) // Exception
      *
      * @param array         $array
      * @return bool
      */
-    public static function is_collection($array)
+    public static function isCollection($array)
     {
         return is_array(reset($array));
     }
