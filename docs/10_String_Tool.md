@@ -102,7 +102,7 @@ Str::replace('Hello (name).', array( '(name)' => 'Jaffy' )); // Hello Jaffy.
 ```
 ### Replace regex
 
-[~ PHPDoc](/src/Str.php#preg_replace)
+[~ PHPDoc](/src/Str.php#pregReplace)
 
 ### upper
 

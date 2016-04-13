@@ -297,7 +297,7 @@ class Str
      * @param int       $count
      * @return string
      */
-    public static function preg_replace($arr, $string, $count = null)
+    public static function pregReplace($arr, $string, $count = null)
     {
         return preg_replace(array_keys($arr), array_values($arr), $string, $count);
     }
