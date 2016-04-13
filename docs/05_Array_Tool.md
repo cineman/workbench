@@ -53,7 +53,7 @@ Arr::push('Cherry', $array);
 
 ### Is multidimensional?
 
-[~ PHPDoc](/src/Arr.php#is_multi)
+[~ PHPDoc](/src/Arr.php#isMulti)
 
 ### Is collection?
 

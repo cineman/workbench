@@ -164,14 +164,14 @@ class ArrTest extends \PHPUnit_Framework_TestCase
     public function testArrayIsMulti()
     {
         // test
-        $this->assertTrue(Arr::is_multi(array(
+        $this->assertTrue(Arr::isMulti(array(
             array(
                 'name' => 'johnson',
                 'age' => 20,
             ),
         )));
 
-        $this->assertTrue(Arr::is_multi(array(
+        $this->assertTrue(Arr::isMulti(array(
             array(
                 'name' => 'johnson',
                 'age' => 20,
@@ -182,7 +182,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase
             ),
         )));
 
-        $this->assertTrue(Arr::is_multi(array(
+        $this->assertTrue(Arr::isMulti(array(
             array(
                 'name' => 'johnson',
                 'age' => 20,
@@ -195,13 +195,13 @@ class ArrTest extends \PHPUnit_Framework_TestCase
             32,
         )));
 
-        $this->assertFalse(Arr::is_multi(array(
+        $this->assertFalse(Arr::isMulti(array(
             'jack',
             'john',
             'johnson',
         )));
 
-        $this->assertFalse(Arr::is_multi(array(
+        $this->assertFalse(Arr::isMulti(array(
             'jack' => 12,
             'john' => 24,
             'johnson' => 32,
