@@ -28,4 +28,4 @@ foreach(['Str', 'Arr'] as $tool)
 }
 ```
 
-> warning: If you are using a framework like laravel theses class names might already been reserved!
+> Warning: If you are using a framework like laravel theses class names might already been reserved!
