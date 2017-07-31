@@ -2,7 +2,6 @@
 	"name": "cineman/workbench",
 	"type": "library",
 	"description": "The cineman Workbench provides helpful utils and tools for the daily developer life.",
-	"version": "1.0.0",
 	"keywords": [ "workbench", "utils", "helper" ],
 	"homepage": "https://github.com/cineman/workbench",
 	"license": "MIT",
